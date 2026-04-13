@@ -1,0 +1,162 @@
+// BILDYAPP API - ENDPOINTS
+// USA REST CLIENT (VS CODE) O THUNDER CLIENT
+
+@baseUrl = http://localhost:3000/api/user
+
+// =========================================
+// 1. REGISTER - Registrar usuario
+// =========================================
+POST {{baseUrl}}/register
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "TestPass123",
+  "name": "Juan",
+  "lastName": "Perez"
+}
+
+// =========================================
+// 2. VALIDATE - Validar email
+// COPIA EL CODIGO DE LA TERMINAL DEL SERVIDOR
+// =========================================
+PUT {{baseUrl}}/validation
+Content-Type: application/json
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+
+{
+  "code": "123456"
+}
+
+// =========================================
+// 3. LOGIN - Iniciar sesion
+// =========================================
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "TestPass123"
+}
+
+// =========================================
+// 4. GET ME - Obtener usuario autenticado
+// =========================================
+GET {{baseUrl}}
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+
+// =========================================
+// 5. UPDATE PROFILE - Actualizar perfil
+// =========================================
+PUT {{baseUrl}}/register
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: application/json
+
+{
+  "name": "Juan Actualizado",
+  "lastName": "Perez Garcia"
+}
+
+// =========================================
+// 6. CHANGE PASSWORD - Cambiar contrasena
+// =========================================
+PUT {{baseUrl}}/password
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: application/json
+
+{
+  "currentPassword": "TestPass123",
+  "newPassword": "NuevaPass123"
+}
+
+// =========================================
+// 7. CREATE COMPANY (no freelance)
+// =========================================
+PATCH {{baseUrl}}/company
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: application/json
+
+{
+  "isFreelance": false,
+  "name": "Mi Empresa SL",
+  "cif": "12345678A",
+  "address": {
+    "street": "Calle Mayor",
+    "number": "1",
+    "postal": "28001",
+    "city": "Madrid",
+    "province": "Madrid"
+  }
+}
+
+// =========================================
+// 8. GET COMPANY - Ver empresa
+// =========================================
+GET {{baseUrl}}/company
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+
+// =========================================
+// 9. UPDATE COMPANY - Actualizar empresa
+// =========================================
+PUT {{baseUrl}}/company
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: application/json
+
+{
+  "name": "Empresa Actualizada SL"
+}
+
+// =========================================
+// 10. UPLOAD LOGO - Subir logo
+// =========================================
+PATCH {{baseUrl}}/logo
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: multipart/form-data
+
+file: ./logo.png
+
+// =========================================
+// 11. INVITE USER - Invitar usuario
+// =========================================
+POST {{baseUrl}}/invite
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: application/json
+
+{
+  "email": "colaborador@test.com",
+  "password": "PassInvitado123",
+  "name": "Colaborador",
+  "lastName": "Nuevo"
+}
+
+// =========================================
+// 12. REFRESH TOKEN - Renovar token
+// =========================================
+POST {{baseUrl}}/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "<PEGA_REFRESH_TOKEN_AQUI>"
+}
+
+// =========================================
+// 13. LOGOUT - Cerrar sesion
+// =========================================
+POST {{baseUrl}}/logout
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+Content-Type: application/json
+
+{
+  "refreshToken": "<PEGA_REFRESH_TOKEN_AQUI>"
+}
+
+// =========================================
+// 14. DELETE (soft delete)
+// =========================================
+DELETE {{baseUrl}}
+Authorization: Bearer <PEGA_TOKEN_AQUI>
+
+// =========================================
+// HEALTH CHECK
+// =========================================
+GET http://localhost:3000/health
